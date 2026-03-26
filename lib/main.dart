@@ -1,6 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+//  CONFIGS
+import 'core/constants/app_colors.dart';
+import 'core/constants/app_text_styles.dart';
+import 'core/constants/app_spacing.dart';
+import 'core/constants/app_radius.dart';
+import 'core/constants/app_gradients.dart';
+
 void main() {
   runApp(const LernyApp());
 }
@@ -31,7 +38,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    // Progress animation
     Timer.periodic(const Duration(milliseconds: 40), (timer) {
       setState(() {
         progress += 0.02;
@@ -40,13 +46,12 @@ class _SplashScreenState extends State<SplashScreen> {
       if (progress >= 1) {
         timer.cancel();
 
-        //  Navigate after loading
         Future.delayed(const Duration(milliseconds: 300), () {
+          if (!mounted) return;
+
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
-              builder: (context) => const Placeholder(), // next screen
-            ),
+            MaterialPageRoute(builder: (context) => const Placeholder()),
           );
         });
       }
@@ -60,17 +65,8 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.infinity,
         height: double.infinity,
 
-        //  Gradient Background
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xFF2670DA), // Top
-              Color(0xFF0E8F90), // Bottom
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        //  USING GRADIENT CONFIG
+        decoration: const BoxDecoration(gradient: AppGradients.primaryGradient),
 
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -80,53 +76,41 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 90,
               height: 90,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(20),
+                color: AppColors.glass,
+                borderRadius: BorderRadius.circular(AppRadius.lg),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: AppColors.black.withValues(alpha: 0.1),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
                 ],
               ),
-              child: const Icon(Icons.school, size: 40, color: Colors.white),
+              child: const Icon(Icons.school, size: 40, color: AppColors.white),
             ),
 
-            const SizedBox(height: 24),
+            SizedBox(height: AppSpacing.lg),
 
             //  Title
-            const Text(
-              "Lerny",
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-                letterSpacing: 0.5,
-              ),
-            ),
+            const Text("Lerny", style: AppTextStyles.title),
 
-            const SizedBox(height: 10),
+            SizedBox(height: AppSpacing.sm),
 
             //  Subtitle
             const Text(
               "Hire & Get Hired in Education",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.white70,
-                letterSpacing: 0.3,
-              ),
+              style: AppTextStyles.subtitle,
             ),
 
-            const SizedBox(height: 80),
+            SizedBox(height: AppSpacing.xxl),
 
             //  Progress Bar
             Container(
               width: 140,
               height: 6,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(10),
+                color: AppColors.white.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(AppRadius.md),
               ),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -134,16 +118,16 @@ class _SplashScreenState extends State<SplashScreen> {
                   width: 140 * progress,
                   height: 6,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(AppRadius.md),
                   ),
                 ),
               ),
             ),
 
-            const SizedBox(height: 12),
+            SizedBox(height: AppSpacing.sm),
 
-            //  Initializing Text
+            //  Initializing
             const Text(
               "INITIALIZING",
               style: TextStyle(
