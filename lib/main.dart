@@ -8,6 +8,8 @@ import 'core/constants/app_spacing.dart';
 import 'core/constants/app_radius.dart';
 import 'core/constants/app_gradients.dart';
 
+import 'features/onboarding/onboarding_screen.dart';
+
 void main() {
   runApp(const LernyApp());
 }
@@ -51,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const Placeholder()),
+            MaterialPageRoute(builder: (context) => OnboardingScreen()),
           );
         });
       }
