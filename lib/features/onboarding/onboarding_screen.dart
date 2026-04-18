@@ -5,6 +5,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_text_styles.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/constants/app_radius.dart';
+import '../../features/login/widgets/instituion_login.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -244,7 +245,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 // SECONDARY BUTTON
                 GestureDetector(
                   onTap: () {
-                    print("Institution flow");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const InstitutionLogin(),
+                      ),
+                    );
                   },
                   child: Container(
                     width: double.infinity,
